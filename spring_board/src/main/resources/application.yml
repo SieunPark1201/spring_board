@@ -1,0 +1,27 @@
+spring:
+  #session 스토리지를 redis로 사용하기 위한 설정
+#  session:
+#    storage-type: redis
+#  redis:
+#    host: localhost
+#    port: 6379
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_board
+    username: root
+    password: 1234
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    hibernate:
+      #create, update
+      ddl-auto: update
+    show_sql: true
+logging:
+  level:
+    #log.error로그 이상만 출력: Trace < debug < info < error -> info로 설정하면 info랑 error 출력되는 식
+    #실무에서는 일반적으로 info로 설정. info는 디폴트이기 떄문에 굳이 명시적으로 설정하지 않아도 됨
+    root: info

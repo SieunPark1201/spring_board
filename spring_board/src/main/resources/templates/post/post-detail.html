@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>글 상세 정보</title>
+    <style>
+        .pull-right {
+            float: right;
+            margin-left: 10px;
+        }
+
+        .btn-primary {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">게시판 서비스</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/authors">회원관리</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/post">글목록</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="page-header">
+        <h1>글 상세 정보</h1>
+    </div>
+
+    <table class="table">
+        <tr>
+            <td>Id:</td>
+            <td th:text="${post.id}"></td>
+        </tr>
+        <tr>
+            <td>제목:</td>
+            <td th:text="${post.title}"></td>
+        </tr>
+        <tr>
+            <td>내용:</td>
+            <td th:text="${post.contents}"></td>
+        </tr>
+        <tr>
+            <td>작성자명:</td>
+            <td th:text="${post.author.name}"></td>
+        </tr>
+    </table>
+
+    <div class="pull-right">
+        <button id="edit-button" class="btn btn-primary">글 정보 수정</button>
+    </div>
+    <div class="pull-right">
+        <a th:href="@{'post/delete?id=' + ${post.id}}" class="btn btn-primary">회원 정보 삭제</a>
+    </div>
+    <div id="edit-form" class="hidden">
+        <form action="/post/update" method="post">
+            <div class="form-group">
+                <label>Id:</label>
+                <input type="text" class="form-control" id="id" name = "id" th:value="${post.id}" readonly>
+            </div>
+            <div class="form-group">
+                <label>제목:</label>
+                <input type="text" class="form-control" id="title" name = "title" th:value="${post.title}">
+            </div>
+            <div class="form-group">
+                <label>내용:</label>
+                <input type="text" class="form-control" id="contents" name = "contents" th:value="${post.contents}">
+            </div>
+            <button type="submit" class="btn btn-primary">수정 완료</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('edit-button').addEventListener('click', function() {
+        document.getElementById('edit-form').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>
+</body>
+</html>
